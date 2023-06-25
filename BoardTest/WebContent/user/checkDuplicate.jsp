@@ -19,5 +19,6 @@ if (isDuplicate) {
 // 클라이언트에게 응답 전송
 response.setContentType("text/plain");
 response.setCharacterEncoding("UTF-8");
+// 개행 (줄바꿈) 데이터가 함께 전송되는 문제가 발생함
 response.getWriter().write(message);
 %>

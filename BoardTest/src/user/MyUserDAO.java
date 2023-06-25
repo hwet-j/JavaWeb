@@ -47,7 +47,7 @@ public class MyUserDAO {
     public boolean isUsernameDuplicate(String check_user) {
         boolean isDuplicate = false;
 
-        try {
+        try {    
             // JDBC 드라이버 로드
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
