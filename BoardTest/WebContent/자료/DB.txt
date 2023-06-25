@@ -1,0 +1,45 @@
+-- 게시판 가벼운 연습을 위한 간단한 테이블 생성
+CREATE TABLE board_test (
+    b_no NUMBER PRIMARY KEY,
+    b_title VARCHAR2(100) NOT NULL,
+    b_content VARCHAR2(4000) NOT NULL,
+    writer VARCHAR2(50) NOT NULL,
+    write_date DATE DEFAULT SYSDATE
+);
+
+-- 게시판에 사용할 시퀀스 생성
+CREATE SEQUENCE boardno_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOCYCLE;
+
+-- 회원가입 테이블 생성
+CREATE TABLE user_table (
+    userno NUMBER PRIMARY KEY,
+    username VARCHAR2(50)  NOT NULL,
+    userpwd VARCHAR2(50) NOT NULL,
+    email VARCHAR2(100) NOT NULL
+);
+
+-- 시퀀스 생성
+CREATE SEQUENCE userno_seq START WITH 1 INCREMENT BY 1;
+
+-- 제약조건을 추가하기
+-- username에 유니크 조건
+ALTER TABLE user_table
+ADD CONSTRAINT uk_username UNIQUE (username);
+
+-- userpwd에 최소글자 8자 이상 조건
+ALTER TABLE user_table
+ADD CONSTRAINT chk_userpwd_length CHECK (LENGTH(userpwd) >= 8);
+
+-- 생성해준 user 테이블과 board 테이블을 FK로 연결 (username과 writer)
+ALTER TABLE board_test
+ADD CONSTRAINT fk_board_test_writer
+FOREIGN KEY (writer) REFERENCES user_table(username);
+
+-- 게시판 테스트를 진행하면서 데이터가 존재하여 FK로 묶어주는게 불가능하여 데이터 삭제 
+-- 에러났었다면 아래코드 실행 후 위 코드 재실행
+DELETE FROM board_test;
+commit;
