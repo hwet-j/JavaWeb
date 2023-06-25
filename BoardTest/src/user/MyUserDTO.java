@@ -14,6 +14,12 @@ public class MyUserDTO {
         this.userpwd = userpwd;
         this.email = email;
     }
+    
+    public MyUserDTO(String username, String userpwd, String email) {
+        this.username = username;
+        this.userpwd = userpwd;
+        this.email = email;
+    }
 
     public int getUserno() {
         return userno;

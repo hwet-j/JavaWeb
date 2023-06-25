@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MyUserDAO {
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe"; // Oracle 데이터베이스 URL
-    private String username = "scott"; // 데이터베이스 사용자명
+    private String userId = "scott"; // 데이터베이스 사용자명
     private String password = "tiger"; // 데이터베이스 비밀번호
 
     // 리턴 타입을 void로 했을 경우JSP에서 에러가 발생한 것을  정확히 인지하지 못하는 상황이 발생했다. 
@@ -21,7 +21,7 @@ public class MyUserDAO {
     public boolean registerUser(MyUserDTO user) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection conn = DriverManager.getConnection(url, username, password);
+            Connection conn = DriverManager.getConnection(url, userId, password);
 
             String sql = "INSERT INTO user_table (userno, username, userpwd, email) VALUES (userno_seq.NEXTVAL, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -43,7 +43,41 @@ public class MyUserDAO {
         }
     }
     
+    
+    public boolean isUsernameDuplicate(String check_user) {
+        boolean isDuplicate = false;
 
+        try {
+            // JDBC 드라이버 로드
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            // 데이터베이스 연결
+            Connection conn = DriverManager.getConnection(url, userId, password);
+
+            // SQL 쿼리 실행
+            String sql = "SELECT COUNT(*) FROM user_table WHERE username = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, check_user);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                if (count > 0) {
+                    // 중복된 아이디가 존재
+                    isDuplicate = true;
+                }
+            }
+ 
+            // 자원 해제
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return isDuplicate;
+    }
     
     
 }
