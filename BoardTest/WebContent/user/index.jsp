@@ -11,7 +11,7 @@
     
      // 아이디 중복 확인 요청
      function checkDuplicate() {
-         var username = document.getElementById("username").value;
+         let username = document.getElementById("username").value;
          // AJAX 요청
          $.ajax({
              url: "checkDuplicate.jsp",
@@ -37,11 +37,11 @@
         
      // 아이디 중복 또는 비밀번호 길이 8자 미만이면 에러
      function checkForm() {
-         var username = document.getElementById("username").value;
-         var password = document.getElementById("password").value;
-         var passcheck = document.getElementById("passcheck").value;
-         var block = true;
-         var isDuplicate = false;
+    	 let username = document.getElementById("username").value;
+    	 let password = document.getElementById("password").value;
+    	 let passcheck = document.getElementById("passcheck").value;
+    	 let block = true;
+    	 let isDuplicate = false;
          
          // 아이디 중복 확인을 위한 AJAX 요청 -> form 전송하면서 위의 코드를 그냥 가져다 조금 수정하여사용
          $.ajax({
@@ -49,7 +49,7 @@
              type: "POST",
              data: { username: username },
              success: function(response) {
-                 var message = response.replace(/\s/g, ""); // 공백 제거
+            	 let message = response.replace(/\s/g, ""); // 공백 제거
                  if (message === "duplicate") {	// === 연산자는 타입까지 비교함
                      // 아이디 중복
                      isDuplicate = true;
@@ -101,7 +101,7 @@
              if (block) {
                  console.log("실행");
                  // 폼 요소
-                 var formElement = document.getElementById("userform");
+                 let formElement = document.getElementById("userform");
                  // 폼 전송 (형식이 잘 작성되었는지 확인하기 위해 전송을 방지해두었기 때문에 여기서 실행)
                  formElement.submit();
              } else {
