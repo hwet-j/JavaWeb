@@ -1,0 +1,23 @@
+public boolean updateBoard(int b_no, String b_title, String b_content) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection conn = DriverManager.getConnection(url, username, password);
+
+            String sql = "UPDATE board_test SET b_title = ?, b_content = ? WHERE b_no = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, b_title);
+            pstmt.setString(2, b_content);
+            pstmt.setInt(3, b_no);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+
+            return rowsUpdated > 0;
+        } catch (Exception e) {
+            System.out.println("글 수정 중 오류가 발생했습니다.");
+            e.printStackTrace();
+            return false;
+        }
+    }

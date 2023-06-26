@@ -10,6 +10,7 @@
 	<ul>
 		<li><a href="<%= request.getContextPath() %>/board/index.jsp">게시판 관리</a></li>
 		<li><a href="<%= request.getContextPath() %>/user/index.jsp">회원  가입</a></li>
+		<li><a href="<%= request.getContextPath() %>/login/index.jsp">로그인</a></li>
 	</ul>
 </body>
 </html>

@@ -39,10 +39,8 @@
      function checkForm() {
          var username = document.getElementById("username").value;
          var password = document.getElementById("password").value;
-         var passcheck = document.getElementById("passcheck").value;
          var block = true;
          var isDuplicate = false;
-         
          // 아이디 중복 확인을 위한 AJAX 요청 -> form 전송하면서 위의 코드를 그냥 가져다 조금 수정하여사용
          $.ajax({
              url: "checkDuplicate.jsp",
@@ -50,7 +48,7 @@
              data: { username: username },
              success: function(response) {
                  var message = response.replace(/\s/g, ""); // 공백 제거
-                 if (message === "duplicate") {	// === 연산자는 타입까지 비교함
+                 if (message === "duplicate") {
                      // 아이디 중복
                      isDuplicate = true;
                  } else {
@@ -77,32 +75,21 @@
              } else {
                  document.getElementById("usernameError").textContent = "";
              }
-             
 
              // 비밀번호 글자수 8자 미만이면 전송 불가
              if (password.length < 8) {
                  document.getElementById("passwordError").textContent = "비밀번호는 최소 8글자 이상이어야 합니다.";
-                 // document.getElementById("password").value = "";	// 초기화 가능
                  document.getElementById("password").focus();
                  block = false;
              } else {
                  document.getElementById("passwordError").textContent = "";
-             }
-             
-             // 비밀번호 확인
-             if (password != passcheck) {
-                 document.getElementById("passwordCheckError").textContent = "비밀번호가 동일하지 않습니다.";
-                 document.getElementById("passcheck").focus();
-                 block = false;
-             } else {
-                 document.getElementById("passwordCheckError").textContent = "";
              }
 
              if (block) {
                  console.log("실행");
                  // 폼 요소
                  var formElement = document.getElementById("userform");
-                 // 폼 전송 (형식이 잘 작성되었는지 확인하기 위해 전송을 방지해두었기 때문에 여기서 실행)
+                 // 폼 전송
                  formElement.submit();
              } else {
                  console.log("미실행");
@@ -127,10 +114,6 @@
         <label for="password">비밀번호:</label>
         <input type="password" id="password" name="password" required>
         <span id="passwordError" style="color: red;"></span>
-        <br><br>
-        <label for="password">비밀번호 확인:</label>
-        <input type="password" id="passcheck" required>
-        <span id="passwordCheckError" style="color: red;"></span>
         <br><br>
         <label for="email">이메일:</label>
         <input type="email" id="email" name="email" required>
