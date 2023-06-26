@@ -50,5 +50,24 @@ html 파일 내에서 사전에 onsubmit을 통해서 비밀번호 8글자 이�
 
 
 회원가입하고 로그인까지 해서 그 아이디의 Session이 유지되도록 해보기.
+-- > 방법은 알아냄
+
 아니면 CSS나 HTML, DB를 좀 더 연습하기 위해서 제약조건이나 컬럼의 개수
-탬플릿이나 기타 여러가지 기능을 추기해보기
+탬플릿이나 기타 여러가지 기능을 추가해보기
+
+```
+데이터 서버 전송시 jsp 파일 최상단에 작성했던 UTF-8 인코딩?작업을 
+매 전송되는 곳마다 저 코드를 작성하기에는 무리가있는데
+
+Servers의 server.xml파일과 web.xml파일에서 설정해줄 수 있다. 
+
+setCharacterEncodingFilter 을 찾으면 주석처리 된 filter-name을 찾을 수 있는데 이것과 
+filter-mapping의 이름이 setCharacterEncodingFilter 인 데이터를 찾아 두 개를 주석 해제하면 
+POST 처리 작업시 한글 깨짐을 방지할 수 있다.
+
+ server.xml 파일의 대략 (63번째 라인 -> 지금 상황에서 63라인 다를 수도 있을듯) 
+Connector 태그를 찾아 해당 태그 내에 URIEncoding="utf-8" 및 port="8081"로 
+인코딩을 utf-8로 설정하고 port 번호를 8081로 설정했다. 
+--> 포트 설정은 가능하다는 것을 의미하고 번호는 상황마다 다름
+```
+

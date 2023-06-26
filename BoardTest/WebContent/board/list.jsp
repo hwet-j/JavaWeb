@@ -40,15 +40,15 @@ try {
         <tbody>
             <% for (MyBoardDTO board : boardList) { %>
             <tr>
-	            <% String title = board.getBTitle();
+	            <% String content = board.getBContent();
 	               int maxLength = 10; // 제목의 최대 길이 지정
-	               if (title.length() > maxLength) {
-	                   title = title.substring(0, maxLength) + "..."; // 일부분만 출력하고 생략 부호 추가
+	               if (content.length() > maxLength) {
+	            	   content = content.substring(0, maxLength) + "..."; // 일부분만 출력하고 생략 부호 추가
 	               }
 	            %>
                 <td><%= board.getBNo() %></td>
-                <td><%= title %></td>
-                <td><%= board.getBContent() %></td>
+                <td><%= board.getBTitle() %></td>
+                <td><%= content %></td>
                 <td><%= board.getWriter() %></td>
                 <td><%= board.getWriteDate() %></td>
                 <td>
