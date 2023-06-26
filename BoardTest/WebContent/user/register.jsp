@@ -17,6 +17,7 @@ try {
 	MyUserDAO userDAO = new MyUserDAO();
 	
     boolean insertResult = userDAO.registerUser(user);
+    
     if (insertResult) {
     	response.sendRedirect(request.getContextPath() + "/user/index.jsp");
         // message = "글이 성공적으로 입력되었습니다.";
