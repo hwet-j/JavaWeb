@@ -23,11 +23,18 @@ public class MyUserDAO {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conn = DriverManager.getConnection(url, userId, password);
 
-            String sql = "INSERT INTO user_table (userno, username, userpwd, email) VALUES (userno_seq.NEXTVAL, ?, ?, ?)";
+            String sql = "INSERT INTO hwet_member VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getUserpwd());
-            pstmt.setString(3, user.getEmail());
+            pstmt.setString(1, user.getMemId());
+            pstmt.setString(2, user.getMemPwd());
+            pstmt.setString(3, user.getMemName());
+            pstmt.setString(4, user.getMemGender());
+            // java.util.Date를 java.sql.Date로 변환
+            java.util.Date utilDate =  user.getMemBirthday();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            pstmt.setDate(5, sqlDate);
+            pstmt.setString(6, user.getMemEmail());
+            pstmt.setString(7, user.getMemTel());
             
 
             int rowsInserted = pstmt.executeUpdate();
@@ -55,7 +62,7 @@ public class MyUserDAO {
             Connection conn = DriverManager.getConnection(url, userId, password);
 
             // SQL 쿼리 실행
-            String sql = "SELECT COUNT(*) FROM user_table WHERE username = ?";
+            String sql = "SELECT COUNT(*) FROM hwet_member WHERE mem_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, check_user);
             ResultSet rs = pstmt.executeQuery();

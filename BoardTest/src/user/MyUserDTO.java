@@ -1,60 +1,82 @@
 package user;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class MyUserDTO {
-	private int userno;
-    private String username;
-    private String userpwd;
-    private String email;
+	private String memId;
+    private String memPwd;
+    private String memName;
+    private String memGender;
+    private Date memBirthday;
+    private String memEmail;
+    private String memTel;
 
-    public MyUserDTO(int userno, String username, String userpwd, String email) {
-        this.userno = userno;
-        this.username = username;
-        this.userpwd = userpwd;
-        this.email = email;
-    }
-    
-    public MyUserDTO(String username, String userpwd, String email) {
-        this.username = username;
-        this.userpwd = userpwd;
-        this.email = email;
+    public String getMemId() {
+        return memId;
+    } 
+
+    public void setMemId(String memId) {
+        this.memId = memId;
     }
 
-    public int getUserno() {
-        return userno;
+    public String getMemPwd() {
+        return memPwd;
     }
 
-    public void setUserno(int userno) {
-        this.userno = userno;
+    public void setMemPwd(String memPwd) {
+        this.memPwd = memPwd;
     }
 
-    public String getUsername() {
-        return username;
+    public String getMemName() {
+        return memName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMemName(String memName) {
+        this.memName = memName;
     }
 
-    public String getUserpwd() {
-        return userpwd;
+    public String getMemGender() {
+        return memGender;
     }
 
-    public void setUserpwd(String userpwd) {
-        this.userpwd = userpwd;
+    public void setMemGender(String memGender) {
+        this.memGender = memGender;
     }
 
-    public String getEmail() {
-        return email;
+    public Date getMemBirthday() {
+        return memBirthday;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMemBirthday(Date memBirthday) {
+        this.memBirthday = memBirthday;
+    }
+
+    public String getMemEmail() {
+        return memEmail;
+    }
+
+    public void setMemEmail(String memEmail) {
+        this.memEmail = memEmail;
+    }
+
+    public String getMemTel() {
+        return memTel;
+    }
+
+    public void setMemTel(String memTel) {
+        this.memTel = memTel;
     }
 
     @Override
     public String toString() {
-        return "UserDTO [userno=" + userno + ", username=" + username + ", userpwd=" + userpwd + ", email=" + email + "]";
+        return "MemberDTO{" +
+                "memId='" + memId + '\'' +
+                ", memPwd='" + memPwd + '\'' +
+                ", memName='" + memName + '\'' +
+                ", memGender='" + memGender + '\'' +
+                ", memBirthday=" + memBirthday +
+                ", memEmail='" + memEmail + '\'' +
+                ", memTel='" + memTel + '\'' +
+                '}';
     }
 }

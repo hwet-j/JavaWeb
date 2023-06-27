@@ -4,7 +4,7 @@
     
     
 <%
-String username = request.getParameter("userid");
+String username = request.getParameter("username");
 String message = "";
 
 MyUserDAO userDAO = new MyUserDAO();

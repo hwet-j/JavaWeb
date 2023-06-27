@@ -21,7 +21,7 @@ public class Login {
             Connection conn = DriverManager.getConnection(url, userId, password);
 
             // SQL 쿼리 실행
-            String sql = "SELECT COUNT(*) FROM user_table WHERE username = ? AND userpwd = ?";
+            String sql = "SELECT COUNT(*) FROM hwet_member WHERE mem_id = ? AND mem_pwd = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, check_user);
             pstmt.setString(2, check_pass);

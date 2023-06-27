@@ -17,6 +17,7 @@
 </head>
 <body>
 <h3>글 등록 하기</h3>
+
 <%
 // 세션에서 사용자명 가져오기
 String username = (String) session.getAttribute("login_user");

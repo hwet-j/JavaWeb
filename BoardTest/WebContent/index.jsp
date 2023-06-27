@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
 <header>
     <h1 class="site-heading text-center text-faded d-none d-lg-block">
         <span class="site-heading-upper text-primary mb-3">회원가입, 로그인, 게시판</span>
@@ -24,16 +25,21 @@
 	<ul>
 		<li><a href="<%= request.getContextPath() %>/board/index.jsp">게시판 관리</a></li>
 		<li><a href="<%= request.getContextPath() %>/user/index.jsp">회원  가입</a></li>
-		<li><a href="<%= request.getContextPath() %>/login/index.jsp">로그인</a></li>
+		<% if (session.getAttribute("login_user") == null) { %>
+		    <li><a href="<%= request.getContextPath() %>/login/index.jsp">로그인</a></li>
+		<% } else { %>
+		    <li><a href="<%= request.getContextPath() %>/login/logout.jsp" onclick="return confirm('로그아웃하시겠습니까?')">로그아웃</a></li>
+		<% } %>
 	</ul>
 </div>
 
+
 <%
 // 세션에서 사용자명 가져오기
-String username = (String) session.getAttribute("login_user");
+String loginuser = (String) session.getAttribute("login_user");
 
 // 가져온 사용자명 사용
-out.println("사용자명: " + username);
+out.println("사용자명: " + loginuser);
 %>
 
 

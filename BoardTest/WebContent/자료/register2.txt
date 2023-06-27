@@ -1,5 +1,3 @@
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="user.MyUserDAO"%>
 <%@page import="user.MyUserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,32 +6,15 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-String userid = request.getParameter("userid");
-String password = request.getParameter("password");
 String username = request.getParameter("username");
-String gender = request.getParameter("gender");
-String birth = request.getParameter("birth");
+String password = request.getParameter("password");
 String email = request.getParameter("email");
-String phonenum = request.getParameter("phonenum");
 
-SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-Date birth_date = df.parse(birth);
-Date dateOfBirth = null;
 String message = ""; // 결과 메시지를 저장할 변수
 
 try {
-	MyUserDTO user = new MyUserDTO();
-	// 날짜 String으로 받았기때문에 Date로 변환
-	dateOfBirth = df.parse(birth);
-	
-	user.setMemId(userid);
-	user.setMemPwd(password);
-	user.setMemName(username);
-	user.setMemGender(gender);
-	user.setMemBirthday(birth_date);
-	user.setMemEmail(email);
-	user.setMemTel(phonenum);
-	MyUserDAO userDAO = new MyUserDAO(); 
+	MyUserDTO user = new MyUserDTO(username, password, email);
+	MyUserDAO userDAO = new MyUserDAO();
 	
     boolean insertResult = userDAO.registerUser(user);
     

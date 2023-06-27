@@ -15,11 +15,11 @@ try {
     boolean insertResult = login.isExist(username, password);
     		
     if (insertResult) {
-    	// response.sendRedirect(request.getContextPath() + "/board/index.jsp");
         message = "로그인 성공";
         
     	 // 로그인 성공 시 세션 생성
         session.setAttribute("login_user", username);
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     } else {
     	//response.sendRedirect(request.getContextPath() + "/board/index.jsp");
     	message = "로그인 실패";

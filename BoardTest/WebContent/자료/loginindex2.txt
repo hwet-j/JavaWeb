@@ -21,9 +21,6 @@
         <input type="password" id="password" name="password" required>
         <span id="passwordError" style="color: red;"></span>
         <br><br>
-        
-        
-        
         <input type="submit" value="로그인">
     </form>
 </body>
