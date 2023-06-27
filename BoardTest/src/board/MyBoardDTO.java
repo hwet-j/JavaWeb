@@ -3,68 +3,100 @@ package board;
 import java.sql.Date;
 
 public class MyBoardDTO {
-    private int bNo;				// 게시판 번호
-    private String bTitle;			// 제목
-    private String bContent;		// 내용
-    private String writer;			// 글쓴이
-    private String writeDate;			// 날짜 
-    
-    public MyBoardDTO(int bNo, String bTitle, String bContent, String writer, String writeDate) {
-        this.bNo = bNo;
-        this.bTitle = bTitle;
-        this.bContent = bContent;
-        this.writer = writer;
-        this.writeDate = writeDate;
-    }
+    private int boardId;
+    private String writer;
+    private String title;
+    private String category;
+    private String link;
+    private String content;
+    private Date regDate;
+    private int hit;
+    private Date updateDate;
+   
+    public int getBoardId() {
+		return boardId;
+	}
 
-    public int getBNo() {
-        return bNo;
-    }
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
+	}
 
-    public void setBNo(int bNo) {
-        this.bNo = bNo;
-    }
+	public String getWriter() {
+		return writer;
+	}
 
-    public String getBTitle() {
-        return bTitle;
-    }
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 
-    public void setBTitle(String bTitle) {
-        this.bTitle = bTitle;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getBContent() {
-        return bContent;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setBContent(String bContent) {
-        this.bContent = bContent;
-    }
+	public String getCategory() {
+		return category;
+	}
 
-    public String getWriter() {
-        return writer;
-    }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
+	public String getLink() {
+		return link;
+	}
 
-    public String getWriteDate() {
-        return writeDate;
-    }
+	public void setLink(String link) {
+		this.link = link;
+	}
 
-    public void setWriteDate(String writeDate) {
-        this.writeDate = writeDate;
-    }
-    
-    @Override
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	@Override
     public String toString() {
-        return "BoardTestDTO{" +
-                "bNo=" + bNo +
-                ", bTitle='" + bTitle + '\'' +
-                ", bContent='" + bContent + '\'' +
+        return "BoardDTO{" +
+                "boardId=" + boardId +
                 ", writer='" + writer + '\'' +
-                ", writeDate=" + writeDate +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", link='" + link + '\'' +
+                ", content='" + content + '\'' +
+                ", regDate=" + regDate +
+                ", hit=" + hit +
+                ", updateDate=" + updateDate +
                 '}';
     }
 }

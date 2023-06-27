@@ -26,10 +26,20 @@ String username = (String) session.getAttribute("login_user");
 
 <form method="post" action="<%= request.getContextPath() %>/board/regist.jsp">
         <label for="title">제목:</label>
-        <input type="text" id="title" name="title" required><br><br>
+        <input type="text" id="title" name="title" placeholder="제목"   required><br><br>
+        
+        <label for="link">추천링크:</label>
+        <input type="url" id="link" name="link" placeholder="추천하고싶은 링크 작성"  required><br><br>
+        
+       	카테고리:
+        <input type="radio" name="category" id="Java" value="JAVA"/><label for="Java">JAVA</label>
+        <input type="radio" name="category" id="DB" value="DB"/><label for="DB">DATABASE</label>
+        <input type="radio" name="category" id="MarkUp" value="MarkUp"/><label for="MarkUp">HTML/CSS</label>
+        <input type="radio" name="category" id="ETC" value="ETC"/><label for="ETC">잡다</label>
+        <br><br>
         
         <label for="content">내용:</label><br>
-        <textarea id="content" name="content" rows="5" cols="50" required></textarea><br><br>
+        <textarea id="content" name="content" rows="5" cols="50" placeholder="추천 내용을 작성해주세요" required></textarea><br><br>
         
         <label for="writer">작성자:</label>
         <input type="text" id="writer" name="writer" value="<%= username %>" required><br><br>

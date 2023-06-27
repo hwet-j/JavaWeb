@@ -40,20 +40,20 @@ try {
         <tbody>
             <% for (MyBoardDTO board : boardList) { %>
             <tr>
-	            <% String content = board.getBContent();
+	            <% String content = board.getContent();
 	               int maxLength = 10; // 제목의 최대 길이 지정
 	               if (content.length() > maxLength) {
 	            	   content = content.substring(0, maxLength) + "..."; // 일부분만 출력하고 생략 부호 추가
 	               }
 	            %>
-                <td><%= board.getBNo() %></td>
-                <td><%= board.getBTitle() %></td>
+                <td><%= board.getBoardId() %></td>
+                <td><%= board.getTitle() %></td>
                 <td><%= content %></td>
                 <td><%= board.getWriter() %></td>
-                <td><%= board.getWriteDate() %></td>
+                <td><%= board.getRegDate() %></td>
                 <td>
 	                <form action="updateForm.jsp" method="post">
-		                <input type="hidden" name="b_no" value="<%= board.getBNo() %>">
+		                <input type="hidden" name="b_no" value="<%= board.getBoardId() %>">
 		                <input type="submit" value="자세히보기">
 	            	</form>
             	</td>

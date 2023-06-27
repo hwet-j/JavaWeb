@@ -1,6 +1,7 @@
 package board;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,16 +19,18 @@ public class MyBoardDAO {
     // 아이디의 입력을 잘못했다거나 연결문제에서 에러가 발생했을 경우 인지 하지 못하는 경우를 대비하여 boolean형태로 설정하여 
     // Insert문이 1개이상 성공했으면  > 0 의 조건으로 True로 만들어주고 그렇지 않으면 false를 반환한다. 
     // 여기서 > 0 조건은 0이면 false를 반환했기 때문에 Insert문이 실행하지 않은것으로 인지하게 하여 JSP에서 에러로 인식
-    public boolean insertBoard(String title, String content, String writer) {
+    public boolean insertBoard(String title, String content, String writer, String category, String link) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conn = DriverManager.getConnection(url, username, password);
-
-            String sql = "INSERT INTO board_test (b_no, b_title, b_content, writer, write_date) VALUES (boardno_seq.NEXTVAL, ?, ?, ?, SYSDATE)";
+            System.out.println(writer);
+            String sql = "INSERT INTO hwet_board VALUES (boardno_seq.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE, 0, null)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, title);
-            pstmt.setString(2, content);
-            pstmt.setString(3, writer);
+            pstmt.setString(1, writer);
+            pstmt.setString(2, title);
+            pstmt.setString(3, category);
+            pstmt.setString(4, link);
+            pstmt.setString(5, content);
 
             int rowsInserted = pstmt.executeUpdate();
  
@@ -50,19 +53,34 @@ public class MyBoardDAO {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conn = DriverManager.getConnection(url, username, password);
 
-            String sql = "SELECT * FROM board_test ORDER BY b_no";
+            String sql = "SELECT * FROM hwet_board ORDER BY board_id";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                int b_no = rs.getInt("b_no");
-                String b_title = rs.getString("b_title");
-                String b_content = rs.getString("b_content");
+                int b_no = rs.getInt("board_id");
                 String writer = rs.getString("writer");
-                String write_date = rs.getString("write_date");
+                String title = rs.getString("title");
+                String category = rs.getString("category");
+                String link = rs.getString("link");
+                String content = rs.getString("content");
+                Date regdate = rs.getDate("regdate");
+                int hit = rs.getInt("hit");
+                Date updateDate = rs.getDate("updatedate");
+                
 
-                MyBoardDTO board = new MyBoardDTO(b_no, b_title, b_content, writer, write_date);
+                MyBoardDTO board = new MyBoardDTO();
+                board.setBoardId(b_no);
+                board.setWriter(writer);
+                board.setTitle(title);
+                board.setCategory(category);
+                board.setLink(link);
+                board.setContent(content);
+                board.setRegDate(regdate);
+                board.setHit(hit);
+                board.setUpdateDate(updateDate);
+                
                 boardList.add(board);
             }
 
@@ -122,7 +140,7 @@ public class MyBoardDAO {
                 String writer = rs.getString("writer");
                 String writeDate = rs.getString("write_date");
 
-                board = new MyBoardDTO(boardNo, title, content, writer, writeDate);
+                //board = new MyBoardDTO(boardNo, title, content, writer, writeDate);
             }
 
             rs.close();
