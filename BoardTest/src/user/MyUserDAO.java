@@ -41,7 +41,9 @@ public class MyUserDAO {
  
             pstmt.close();
             conn.close();
-            System.out.println("아이디 생성이 성공적으로 이뤄졌습니다.");
+            if (rowsInserted > 0) {
+            	System.out.println("아이디 생성이 성공적으로 이뤄졌습니다.");
+            }
             return rowsInserted > 0;
         } catch (Exception e) {
             System.out.println("아이디 생성 중 오류가 발생했습니다.");

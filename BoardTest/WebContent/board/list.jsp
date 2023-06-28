@@ -52,7 +52,7 @@ try {
                 <td><%= board.getWriter() %></td>
                 <td><%= board.getRegDate() %></td>
                 <td>
-	                <form action="updateForm.jsp" method="post">
+	                <form action="show.jsp" method="post">
 		                <input type="hidden" name="b_no" value="<%= board.getBoardId() %>">
 		                <input type="submit" value="자세히보기">
 	            	</form>

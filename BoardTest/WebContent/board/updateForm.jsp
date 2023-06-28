@@ -27,22 +27,54 @@ try {
 </head>
 <body>
     <h2>글 수정</h2>
-
-    <% if (board != null) { %>
-        <form action="update.jsp" method="post">
-            <input type="hidden" name="b_no" value="<%= board.getBNo() %>">
-            <div> 
-                <label for="b_title">제목</label>
-                <input type="text" name="b_title" id="b_title" value="<%= board.getBTitle() %>">
-            </div>
-            <div>
-                <label for="b_content">내용</label>
-                <textarea name="b_content" id="b_content" rows="5" cols="50"><%= board.getBContent() %></textarea>
-            </div>
-            <input type="submit" value="수정">
-        </form>
-    <% } else { %>
-        <p>글 정보를 가져오는데 실패했습니다.</p>
-    <% } %>
+    <form action="update.jsp" method="post">
+	    <table>
+                
+            <tr>
+                <th>작성자:</th>
+                <input type="hidden" name="b_no" value="<%= board.getBoardId() %>" />
+                <td><%= board.getWriter() %></td>
+            </tr>
+            <tr>
+                <th><label for="b_title">제목</label></th>
+                <td>
+                <input type="text" name="b_title" id="b_title" value="<%= board.getTitle() %>" required></td>
+            </tr>
+            <tr>
+                <th>카테고리:</th>
+                <td>
+                	<input type="radio" name="category" id="Java" value="JAVA" <% if(board.getCategory().equals("JAVA")) { %>checked<% } %> /><label for="Java">JAVA</label>
+					<input type="radio" name="category" id="DB" value="DB" <% if(board.getCategory().equals("DB")) { %>checked<% } %> /><label for="DB">DATABASE</label>
+					<input type="radio" name="category" id="HTML/CSS" value="HTML/CSS" <% if(board.getCategory().equals("HTML/CSS")) { %>checked<% } %> /><label for="HTML/CSS">HTML/CSS</label>
+					<input type="radio" name="category" id="ETC" value="ETC" <% if(board.getCategory().equals("ETC")) { %>checked<% } %> /><label for="ETC">잡다</label>
+		        </td>
+            </tr>
+            <tr>
+                <th>링크:</th>
+                <td><input type="url" name="b_link" value="<%= board.getLink() %>" required></td>
+            </tr>
+            <tr>
+                <th><label for="b_content">내용</label></th>
+                <td>
+                <textarea name="b_content" id="b_content" rows="5" cols="50"  required><%= board.getContent() %></textarea></td>
+            </tr>
+	        <tr>
+	            <th>등록일자:</th>
+	            <td><%= board.getRegDate() %></td>
+	        </tr>
+	        <tr>
+	            <th>조회수:</th>
+	            <td><%= board.getHit() %></td>
+	        </tr>
+	        <tr>
+	            <th>수정일자:</th>
+	            <td><%= board.getUpdateDate() %></td>
+	        </tr>
+	        <tr>
+	            <td><input type="submit" value="수정"></td>
+	        </tr>
+	    </table>
+	</form> 
+	    
 </body>
 </html>

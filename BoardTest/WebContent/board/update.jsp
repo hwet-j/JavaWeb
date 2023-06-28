@@ -7,14 +7,16 @@
 request.setCharacterEncoding("utf-8");
 
 int b_no = Integer.parseInt(request.getParameter("b_no"));
-String b_title = request.getParameter("b_title");
-String b_content = request.getParameter("b_content");
+String title = request.getParameter("b_title");
+String category = request.getParameter("category");
+String link = request.getParameter("b_link");
+String content = request.getParameter("b_content");
 
 String message = ""; // 결과 메시지를 저장할 변수
 
-try {
+try { 
     MyBoardDAO boardDAO = new MyBoardDAO();
-    boolean updateResult = boardDAO.updateBoard(b_no, b_title, b_content);
+    boolean updateResult = boardDAO.updateBoard(b_no, title, category, link, content);
     if (updateResult) {
     	response.sendRedirect(request.getContextPath() + "/board/index.jsp");
     	System.out.println("수정 성공!!");

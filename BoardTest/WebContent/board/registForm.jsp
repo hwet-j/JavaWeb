@@ -34,7 +34,7 @@ String username = (String) session.getAttribute("login_user");
        	카테고리:
         <input type="radio" name="category" id="Java" value="JAVA"/><label for="Java">JAVA</label>
         <input type="radio" name="category" id="DB" value="DB"/><label for="DB">DATABASE</label>
-        <input type="radio" name="category" id="MarkUp" value="MarkUp"/><label for="MarkUp">HTML/CSS</label>
+        <input type="radio" name="category" id="HTML/CSS" value="HTML/CSS"/><label for="HTML/CSS">HTML/CSS</label>
         <input type="radio" name="category" id="ETC" value="ETC"/><label for="ETC">잡다</label>
         <br><br>
         

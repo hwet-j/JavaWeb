@@ -38,14 +38,14 @@ try {
     boolean insertResult = userDAO.registerUser(user);
     
     if (insertResult) {
-    	response.sendRedirect(request.getContextPath() + "/user/index.jsp");
+    	response.sendRedirect(request.getContextPath() + "/index.jsp");
         // message = "글이 성공적으로 입력되었습니다.";
     } else {
     	response.sendRedirect(request.getContextPath() + "/user/index.jsp");
     	// message = "글 입력에 실패했습니다.";
     }
 } catch (Exception e) {
-	response.sendRedirect(request.getContextPath() + "/user/registForm.jsp");
+	response.sendRedirect(request.getContextPath() + "/user/index.jsp");
     //message = "글 입력 중 오류가 발생했습니다.";
     e.printStackTrace();
 }

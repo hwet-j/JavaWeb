@@ -24,7 +24,7 @@ public class MyBoardDAO {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conn = DriverManager.getConnection(url, username, password);
             System.out.println(writer);
-            String sql = "INSERT INTO hwet_board VALUES (boardno_seq.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE, 0, null)";
+            String sql = "INSERT INTO hwet_board(board_id, writer, title, category, link, content, regdate) VALUES (boardno_seq.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, writer);
             pstmt.setString(2, title);
@@ -96,16 +96,18 @@ public class MyBoardDAO {
     }
     
     
-    public boolean updateBoard(int b_no, String b_title, String b_content) {
+    public boolean updateBoard(int b_no, String b_title, String category, String link, String content) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conn = DriverManager.getConnection(url, username, password);
 
-            String sql = "UPDATE board_test SET b_title = ?, b_content = ? WHERE b_no = ?";
+            String sql = "UPDATE hwet_board SET title = ?, category = ?, link = ?, content = ?  WHERE b_no = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, b_title);
-            pstmt.setString(2, b_content);
-            pstmt.setInt(3, b_no);
+            pstmt.setString(2, category);
+            pstmt.setString(3, link);
+            pstmt.setString(4, content);
+            pstmt.setInt(5, b_no);
 
             int rowsUpdated = pstmt.executeUpdate();
 
@@ -127,20 +129,25 @@ public class MyBoardDAO {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conn = DriverManager.getConnection(url, username, password);
 
-            String sql = "SELECT * FROM board_test WHERE b_no = ?";
+            String sql = "SELECT * FROM hwet_board WHERE board_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, b_no);
 
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                int boardNo = rs.getInt("b_no");
-                String title = rs.getString("b_title");
-                String content = rs.getString("b_content");
-                String writer = rs.getString("writer");
-                String writeDate = rs.getString("write_date");
+            	board = new MyBoardDTO();
+            	
+            	board.setBoardId(rs.getInt("board_id"));
+            	board.setWriter(rs.getString("writer"));
+            	board.setTitle(rs.getString("title"));
+            	board.setCategory(rs.getString("category"));
+            	board.setLink(rs.getString("link"));
+            	board.setContent(rs.getString("content"));
+            	board.setRegDate(rs.getDate("regdate"));
+            	board.setHit(rs.getInt("hit"));
+                board.setUpdateDate(rs.getDate("updatedate"));
 
-                //board = new MyBoardDTO(boardNo, title, content, writer, writeDate);
             }
 
             rs.close();
